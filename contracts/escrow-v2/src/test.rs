@@ -203,7 +203,7 @@ fn stay_paid_rejects_guest_dispute_but_allows_damage_claim_until_deadline() {
     c.escrow.pay_stay(&id);
     assert_eq!(c.escrow.try_dispute(&id), Err(Ok(EscrowError::NotLocked)));
     c.escrow.claim_damage(&id);
-    assert_eq!(c.escrow.try_resolve(&id, &1_000, &1_000, &0), Err(Ok(EscrowError::InvalidSplit)));
+    assert_eq!(c.escrow.try_resolve(&id, &1_000, &1_500, &0), Err(Ok(EscrowError::InvalidSplit)));
     assert_eq!(c.escrow.try_resolve(&id, &0, &2_000, &1), Err(Ok(EscrowError::InvalidSplit)));
     c.escrow.resolve(&id, &500, &1_500, &0);
     assert_eq!(balances(&c), (1_000_000 - 12_000, 11_500, 500, 0));
